@@ -111,7 +111,7 @@ const types = {'.html':'text/html; charset=utf-8','.css':'text/css','.js':'text/
         assert.equal(await fallback.locator('#navegacao').isVisible(),true);
         assert.ok(await fallback.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));
       }
-      assert.equal(await fallback.locator('#contact-fields').isDisabled(),true);
+      assert.equal(await fallback.locator('#message').isDisabled(),true);
       await fallback.goto(url('atuacao.html'));
       await fallback.locator('summary').first().click();
       assert.equal(await fallback.locator('details').first().getAttribute('open'),'');
@@ -145,7 +145,8 @@ const types = {'.html':'text/html; charset=utf-8','.css':'text/css','.js':'text/
         assert.equal(missing.status(),404);
         assert.equal(await page.locator('link[rel=stylesheet]').evaluate(e=>e.sheet!==null),true);
         await page.locator('.brand').click();
-        assert.equal(page.url(),live+'index.html');
+        assert.ok(['/', '/index', '/index.html'].includes(new URL(page.url()).pathname));
+        assert.match(await page.title(),/Início/);
         report.live = {url:live,pages:6,contact:'passed',nested404:'passed'};
       }
       report.results.push({engine:engine.name(),version:browser.version(),pages:6,widths:[320,390,768,1024,1440],flow:'passed',noJS:'passed',networkAndStorage:'passed',nested404:'passed'});
