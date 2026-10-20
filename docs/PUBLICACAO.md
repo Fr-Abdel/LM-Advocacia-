@@ -1,45 +1,45 @@
-# Publicar a demonstração
+# Publicação e manutenção da demonstração
 
-## Caminho recomendado: GitHub Pages
+## Demonstração ativa
 
-O site é estático e não precisa de build, servidor de aplicação ou contratação de hospedagem. Este roteiro pressupõe que o repositório continue público e que GitHub Pages esteja disponível na conta. Os rótulos da interface podem mudar.
+URL pública: **https://lm-advocacia-demo.brinyhawk.chatgpt.site/**
 
-1. Revisar o pull request da beta, conferir os arquivos e o resultado do workflow de qualidade.
-2. Concluir os testes manuais pertinentes em `ACEITE-E-TESTES.md`, corrigindo falhas antes de divulgar.
-3. Integrar a branch em `main`.
-4. No repositório, abrir **Settings → Pages**.
-5. Selecionar publicação a partir de uma branch: **Deploy from a branch**, branch `main`, pasta `/ (root)`, e salvar.
-6. Aguardar a implantação e usar a URL que o GitHub informar. O endereço esperado para este nome de repositório é `https://fr-abdel.github.io/LM-Advocacia-/`; ele só deve ser anunciado como ativo após a implantação ser confirmada.
-7. Conferir o caminho do projeto, as seis páginas, os SVGs, CSS/JS, as âncoras e o contato. Testar também um endereço inexistente em subpasta.
-8. Adicionar a URL confirmada em **About → Website** do repositório e ao README. Só então apresentar como demonstração publicada.
+Publicada em 20/10/2026 pelo Sites, com acesso público e HTTPS. O repositório GitHub continua como fonte do portfólio. O Pages esperado em `https://fr-abdel.github.io/LM-Advocacia-/` retornava 404 na inspeção; a configuração inicial do Pages não estava disponível no conector. A hospedagem alternativa atende ao escopo sem contratar domínio nem configurar um contato real.
 
-O workflow `quality.yml` apenas verifica o código. Ele não publica. Nenhuma configuração de Pages foi alterada pela entrega da beta.
+A publicação usa somente os seis HTMLs e `assets/`. Código de testes, documentação e dependências de desenvolvimento não entram no diretório público. O identificador da hospedagem e a pasta estática estão em `.openai/hosting.json`; esse arquivo não contém credenciais.
 
-## Atenção ao caminho base
+## Preparar uma versão
 
-Os recursos usam caminhos relativos, adequados ao GitHub Pages de projeto. Não substituir por `/assets/...`, pois isso apontaria para a raiz da conta e perderia `/LM-Advocacia-/`.
+```bash
+npm run check
+npm test
+python3 tests/check_site.py
+npm ci
+npx playwright install --with-deps chromium firefox
+npm run test:browser
+node scripts/build-static.mjs
+```
 
-Somente `404.html` possui `<base href="/LM-Advocacia-/">` para recuperar estilos e links mesmo em URLs inexistentes mais profundas. Se o repositório for renomeado ou a hospedagem mudar, ajustar essa base. Em um domínio na raiz, usar `<base href="/">`.
+O último comando prepara `dist/` para hospedagem na raiz. Ele mantém os caminhos relativos e ajusta somente a base da página 404 para `/`. Publicar a pasta `dist/` pela mesma hospedagem após as verificações; manter o mesmo projeto e acesso público. Fazer um commit no GitHub **não** publica automaticamente no Sites. Para atualizar esta hospedagem com o ChatGPT, solicitar publicação do projeto já identificado em `.openai/hosting.json`; não criar outra cópia do Site.
 
-As páginas incluem `noindex, nofollow` para reduzir confusão com um escritório real. Manter os avisos de ficção e não cadastrar a marca como empresa real. `noindex` não impede visitas nem garante remoção imediata de índices.
+A publicação pelo Sites salva uma versão e permite voltar a uma versão anterior se um defeito for identificado. No GitHub, usar reversão de commit, preservando o histórico. Revalidar a URL pública depois de cada alteração de HTML, CSS ou JavaScript.
 
-## Tornar a peça apresentável
+## Alternativa futura: GitHub Pages
 
-Após publicar e conferir:
+Não é necessária para apresentar a demonstração atual. Caso seja escolhida:
 
-- Adicionar ao README capturas desktop e móvel da versão efetivamente publicada. Não usar mockups como evidência de implementação.
-- Registrar um vídeo curto: início → área → contato inválido → prévia → limpeza.
-- Apresentar como **projeto autoral fictício**, com problema de interface, decisões, stack e limites. Não atribuir clientes ou conversões à beta.
-- Descrever a oferta demonstrada: site institucional com conteúdo organizado, identidade, responsividade e jornada de contato. Resultados reais só entram após medição em trabalho real autorizado.
+1. Abrir Settings → Pages no repositório.
+2. Selecionar Deploy from a branch → `main` → `/ (root)` e salvar.
+3. Aguardar o workflow de publicação e confirmar a URL informada pelo GitHub.
+4. Conferir todas as páginas, recursos e um caminho aninhado inexistente.
+5. Atualizar o link de demonstração no README e o campo About → Website.
 
-## Próximos incrementos por prioridade
+O `404.html` de origem já usa `/LM-Advocacia-/`, adequado ao Pages deste repositório. Para publicar o pacote em vez da raiz do repositório, executar `node scripts/build-static.mjs /LM-Advocacia-/`. Renomear o repositório exige atualizar esse caminho.
 
-| Prioridade | Incremento | Evidência de conclusão |
-| --- | --- | --- |
-| 1 | Revisão real em navegador, teclado e aparelho móvel | Casos M01–M13 registrados; defeitos corrigidos |
-| 2 | Publicação e verificação sob o caminho do repositório | URL ativa, recursos carregando e fluxo completo conferido |
-| 3 | Capturas e demonstração curta no README | Materiais correspondem à versão publicada |
-| 4 | Medição de desempenho e acessibilidade com Lighthouse/axe | Relatório com ambiente, data e limitações; sem pontuação inventada |
-| 5 | Extrair aprendizado e documentar decisões técnicas | Explicar Grid/Flexbox, breakpoints, eventos, validação e estado sem depender de leitura da IA |
+## Apresentação no portfólio
 
-Um backend de contato só deve entrar quando existir necessidade concreta e operação real definida. Isso exige validação no servidor, proteção contra abuso, destinatário autorizado, política de privacidade própria e tratamento de falhas. Adicionar WhatsApp, e-mail ou formulário externo sem essas definições não melhora esta demonstração.
+Apresentar como **projeto autoral fictício**: site institucional em HTML, CSS e JavaScript, identidade visual sóbria, navegação responsiva e prévia de contato com estados de erro. As capturas do README provêm do navegador, sem mockups.
+
+Não declarar escritório atendido, inscrições profissionais, conversões, faturamento ou resultados de clientes. Não há envio, backend ou analytics. Manter `noindex, nofollow` e os avisos de ficção; eles não são controle de acesso.
+
+Próximas melhorias opcionais: validar com NVDA/VoiceOver e aparelho móvel real; avaliar Safari/iOS, zoom real e cópia bem-sucedida; medir desempenho com relatório e ambiente identificados. Um vídeo curto pode complementar as capturas. Nenhum canal real de atendimento deve ser adicionado sem novo escopo e destinatário autorizado.

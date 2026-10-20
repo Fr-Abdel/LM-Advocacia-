@@ -41,7 +41,11 @@ Não há dependências de execução. O navegador lê os arquivos diretamente; o
 
 A repetição do layout em HTML torna os arquivos independentes e legíveis neste estágio. Caso o site cresça significativamente, um gerador estático com templates pode reduzir a manutenção repetida. Não há benefício suficiente para introduzi-lo nesta beta.
 
-## Publicação e reversibilidade
+## Incremento de portfólio de 20/10/2026
+
+A demonstração foi publicada no Sites, mantendo este repositório. Foram acrescentados Playwright apenas para desenvolvimento, testes de navegador no Actions, capturas verificáveis e empacotamento estático com ajuste de base da página 404. A limpeza do campo de mensagem foi corrigida para não restaurar espaços de indentação, e o foco do menu foi corrigido na troca para o breakpoint móvel. As limitações de acessibilidade e de dispositivos estão registradas no aceite.
+
+## Publicação e reversibilidade da entrega inicial
 
 A entrega deve entrar em uma branch de implementação e pull request, permitindo comparar os arquivos antes da integração. Nenhuma configuração de GitHub Pages é alterada nesta etapa. É possível encerrar o pull request para descartar a proposta; após integração, reverter o commit preserva o histórico.
 

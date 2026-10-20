@@ -1,0 +1,43 @@
+{
+  "date": "2026-10-20T17:36:36.476Z",
+  "results": [
+    {
+      "engine": "chromium",
+      "version": "151.0.7922.34",
+      "pages": 6,
+      "widths": [
+        320,
+        390,
+        768,
+        1024,
+        1440
+      ],
+      "flow": "passed",
+      "noJS": "passed",
+      "networkAndStorage": "passed",
+      "nested404": "passed"
+    },
+    {
+      "engine": "firefox",
+      "version": "153.0",
+      "pages": 6,
+      "widths": [
+        320,
+        390,
+        768,
+        1024,
+        1440
+      ],
+      "flow": "passed",
+      "noJS": "passed",
+      "networkAndStorage": "passed",
+      "nested404": "passed"
+    }
+  ],
+  "live": {
+    "url": "https://lm-advocacia-demo.brinyhawk.chatgpt.site/",
+    "pages": 6,
+    "contact": "passed",
+    "nested404": "passed"
+  }
+}

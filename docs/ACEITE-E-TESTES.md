@@ -1,33 +1,48 @@
 # Aceite e testes da beta
 
-## Evidência executada nesta entrega
+## Evidência da rodada de 20/10/2026
 
-| Verificação | Resultado |
+A revisão usa testes reais em navegador no GitHub Actions e inspeção visual das capturas, sem alegar teste em celular físico. O ambiente local não possuía executáveis de navegador; os testes foram executados em runners Ubuntu do GitHub.
+
+| Verificação | Resultado e limite |
 | --- | --- |
 | Sintaxe: `npm run check` | Passou |
 | Lógica do contato: `npm test` | 8 testes, 8 aprovados |
-| Estrutura: `python tests/check_site.py` | 6 páginas e 96 links/recursos locais verificados |
-| IDs e referências ARIA/labels | Sem duplicações ou referências ausentes nas verificações estáticas |
-| Contrastes principais calculados | 7 pares, todos acima de 4,5:1 |
-| Navegador, teclado, leitor de tela, renderização móvel | Não executados; ambiente sem navegador de QA disponível |
-| Publicação e GitHub Actions remoto | Não verificados nesta medição local |
+| Estrutura: `python3 tests/check_site.py` | 6 páginas, 96 links/recursos e referências ARIA verificados |
+| Contraste | 7 pares principais entre 4,92:1 e 13,99:1; não cobre todos os estados |
+| Renderização | Capturas das seis páginas em 320, 390, 768, 1024 e 1440 px revisadas; sem cortes ou sobreposições observadas |
+| Navegadores | Chromium e Firefox, execução automatizada; versões e resultados no relatório do Actions |
+| Fluxo | Validação, resumo focável, seleção de área, prévia literal, edição e limpeza; ausência de requisições, cookies e Web Storage no fluxo local |
+| Teclado | Skip link, ativação do menu, Tab para navegação, Escape, retorno de foco no breakpoint e foco dos erros/resultado verificados |
+| Sem JavaScript | Navegação visível, FAQ nativa e formulário desativado verificados em 320 px |
+| Área de transferência | Caminho de permissão negada simulado; cópia real bem-sucedida não verificada |
+| Publicação | Sites com audiência pública; verificação da URL, páginas, CSS, formulário e 404 aninhado pela suíte |
+| Limites | Não executados: leitor de tela, aparelho físico, Safari/iOS e zoom real do navegador |
 
-Os pares verificados variam de 4,92:1 a 13,99:1. O cálculo usa luminância relativa sRGB. Ele cobre as combinações indicadas no script, não todos os estados de renderização. Semântica estática e contraste não comprovam conformidade integral com WCAG.
+As capturas são da implementação renderizada, sem mockups. O relatório JSON e as capturas ficam no artefato `browser-evidence` do workflow; a retenção automática é de 14 dias. As capturas principais são preservadas também em `docs/images/`. Execução de referência aprovada: [GitHub Actions #39467467567](https://github.com/Fr-Abdel/LM-Advocacia-/actions/runs/39467467567), commit `6fed47fa33eea8b2bc4128bc7eeb7e89fb86adf3`. Ambiente: Ubuntu, Playwright 1.62.1, Chromium 151.0.7922.34 e Firefox 153.0. O relatório completo é preservado em `docs/evidence/browser-report.json`.
+
+### Defeitos corrigidos
+
+1. O HTML continha espaços como valor padrão do `textarea`. `form.reset()` restaurava esses espaços. O campo agora tem valor padrão vazio; o teste exige limpeza exata.
+2. A navegação podia perder foco quando CSS ocultava o menu antes do evento `matchMedia`. A origem do foco agora é acompanhada e o foco retorna ao botão Menu ao entrar no breakpoint móvel. O teste aguarda e confirma o controle visível.
+3. O pacote da hospedagem na raiz ajusta a base de `404.html` para `/`, mantendo a origem compatível com `/LM-Advocacia-/` no Pages. Isso permite recuperar estilos e navegação de um caminho aninhado inexistente.
 
 ## Critérios objetivos de aceite
 
-| ID | Critério | Como verificar | Estado |
-| --- | --- | --- | --- |
-| A01 | As cinco páginas institucionais existem e todos os links locais resolvem | Script de estrutura | Aprovado no escopo estático |
-| A02 | A marca é identificada como fictícia e não oferece canais reais | Leitura das páginas e inspeção de código | Aprovado |
-| A03 | O contato rejeita campos vazios, limites excedidos e área manipulada | Testes Node | Aprovado na lógica |
-| A04 | A prévia só aparece após validação, sem envio; edição e limpeza funcionam | M04–M07 | Pendente de navegador |
-| A05 | Não há rolagem horizontal em 320, 390, 768, 1024 e 1440 px | M01 | Pendente de navegador |
-| A06 | Navegação e formulário operam por teclado com foco perceptível | M02 e M04 | Pendente de navegador |
-| A07 | Erros, foco e resultado são compreensíveis por leitor de tela | M10 | Pendente de leitor de tela |
-| A08 | Conteúdo e navegação continuam acessíveis sem JS | Inspeção e M08 | Implementado; interação pendente |
-| A09 | Não há chamada de envio ou persistência implementada | Inspeção de JS e script | Aprovado no código; confirmar M06 |
-| A10 | Arquivos e âncoras funcionam sob `/LM-Advocacia-/` após publicação | M11 | Pendente de publicação |
+| ID | Critério | Estado |
+| --- | --- | --- |
+| A01 | Páginas e links locais existentes | Aprovado por verificação estática e navegador |
+| A02 | Ficção identificada, sem canais reais ou resultados comerciais inventados | Aprovado |
+| A03 | Contato rejeita dados inválidos e área manipulada | Aprovado; testes Node e integração |
+| A04 | Prévia após validação, edição e limpeza | Aprovado em Chromium e Firefox |
+| A05 | Sem rolagem horizontal em 320, 390, 768, 1024 e 1440 px | Aprovado nas seis páginas nos dois motores; capturas Chromium revisadas |
+| A06 | Teclado e foco | Aprovado no percurso automatizado descrito; tabulação integral manual permanece recomendada |
+| A07 | Anúncios compreensíveis em leitor de tela | Pendente; não é afirmada conformidade WCAG integral |
+| A08 | Navegação e conteúdo sem JS | Aprovado no percurso de início, atuação e contato |
+| A09 | Sem envio ou persistência de aplicação | Aprovado no código e na observação do fluxo local |
+| A10 | Recursos e recuperação de 404 na hospedagem ativa | Aprovado na URL pública; compatibilidade de subpasta validada no servidor de teste |
+
+O aceite vale para **demonstração beta de portfólio**. Uma entrega para operação real exigiria outro escopo, conteúdo aprovado e validações adicionais. Os limites acima devem permanecer visíveis na documentação.
 
 ## Roteiro manual reproduzível
 
@@ -51,8 +66,26 @@ Executar em navegador atual no desktop e em pelo menos um aparelho móvel real. 
 
 Não marcar a beta como visualmente revisada ou totalmente acessível antes de concluir os casos correspondentes. Lighthouse e axe podem ajudar posteriormente, mas não substituem teclado e leitor de tela.
 
-## Registro de execução manual
+## Registro da execução e pendências
 
-| Caso | Navegador/dispositivo | Resultado | Evidência/observação |
-| --- | --- | --- | --- |
-| M01–M13 | A preencher na revisão | Pendente | Nenhuma execução manual alegada |
+| Casos | Evidência desta rodada |
+| --- | --- |
+| M01 | 30 combinações página/largura por motor, sem overflow; capturas Chromium inspecionadas |
+| M02–M03 | Percurso parcial automatizado por teclado e troca 760/761 px; revisão manual integral não alegada |
+| M04–M07 | Validação, resumo, área, texto literal, edição, limpeza e ausência de envio/persistência automatizados |
+| M08 | Navegação, campos desativados e FAQ sem JS em 320 px |
+| M09 | Falha de permissão simulada aprovada; cópia real permanece pendente |
+| M10 | Pendente de NVDA/VoiceOver |
+| M11 | Publicação na raiz e 404 aninhado verificados; subpasta Pages simulada localmente no runner |
+| M12 | Movimento reduzido e reflow de 320 px verificados; zoom real de 200/400% pendente |
+| M13 | Chromium e Firefox automatizados; Safari/iOS e aparelho físico pendentes |
+
+## Reproduzir a suíte
+
+```bash
+npm ci
+npx playwright install --with-deps chromium firefox
+npm run test:browser
+```
+
+Para incluir o smoke test externo, definir `LIVE_URL=https://lm-advocacia-demo.brinyhawk.chatgpt.site` no ambiente. O workflow já faz isso. A suíte serve a origem sob `/LM-Advocacia-/`, grava `test-results/browser-report.json` e falha quando há erro nas verificações. Ela não é uma auditoria de segurança ou uma certificação de acessibilidade.
