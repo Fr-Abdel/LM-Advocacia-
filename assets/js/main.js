@@ -41,6 +41,17 @@
     document.documentElement.classList.add('js');
     button.hidden = false;
     const breakpoint = window.matchMedia('(max-width: 760px)');
+    // Ao ocultar a navegação, o navegador pode perder o foco antes do evento
+    // de matchMedia. Preserva a origem para devolver foco ao controle visível.
+    let navHadFocus = false;
+    document.addEventListener('focusin', (event) => {
+      if (event.target !== document.body && event.target !== document.documentElement) {
+        navHadFocus = nav.contains(event.target);
+      }
+    });
+    document.addEventListener('pointerdown', (event) => {
+      if (!nav.contains(event.target)) navHadFocus = false;
+    });
     function closeMenu(restoreFocus = false) {
       nav.classList.remove('is-open');
       button.setAttribute('aria-expanded', 'false');
@@ -58,7 +69,7 @@
       if (event.key === 'Escape' && breakpoint.matches && button.getAttribute('aria-expanded') === 'true') closeMenu(true);
     });
     breakpoint.addEventListener('change', () => {
-      const focusWasInNav = nav.contains(document.activeElement);
+      const focusWasInNav = nav.contains(document.activeElement) || navHadFocus;
       closeMenu(breakpoint.matches && focusWasInNav);
     });
   }
