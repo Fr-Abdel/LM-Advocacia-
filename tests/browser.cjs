@@ -29,6 +29,7 @@ const types = {'.html':'text/html; charset=utf-8','.css':'text/css','.js':'text/
   let browser;
   try {
     for (const engine of [chromium, firefox]) {
+      console.log(`Validando ${engine.name()}`);
       browser = await engine.launch();
       const context = await browser.newContext({viewport:{width:1440,height:900}, reducedMotion:'reduce'});
       const page = await context.newPage();
@@ -64,6 +65,7 @@ const types = {'.html':'text/html; charset=utf-8','.css':'text/css','.js':'text/
       await page.setViewportSize({width:761,height:900});
       await page.locator('#navegacao a').first().focus();
       await page.setViewportSize({width:760,height:900});
+      await page.waitForFunction(()=>document.querySelector('.menu-toggle')===document.activeElement, null, {timeout:5000});
       assert.equal(await page.locator('.menu-toggle').evaluate(e=>e===document.activeElement),true);
       await page.goto(url('contato.html?area=civil'));
       assert.equal(await page.locator('#area').inputValue(),'civil');
@@ -115,6 +117,37 @@ const types = {'.html':'text/html; charset=utf-8','.css':'text/css','.js':'text/
       assert.equal(await fallback.locator('details').first().getAttribute('open'),'');
       assert.equal(await page.evaluate(()=>getComputedStyle(document.documentElement).scrollBehavior),'auto');
       assert.deepEqual(errors,[]);
+      if (process.env.LIVE_URL && engine === chromium) {
+        const live = process.env.LIVE_URL.replace(/\/$/, '') + '/';
+        for (const name of pages) {
+          const response = await page.goto(live + name);
+          assert.equal(response.status(), 200, `Publicação: ${name}`);
+          assert.equal(await page.locator('link[rel=stylesheet]').evaluate(e=>e.sheet!==null), true);
+          assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));
+        }
+        for (const width of [390,1440]) {
+          await page.setViewportSize({width,height:900});
+          await page.goto(live);
+          await page.screenshot({path:path.join(output,`live-inicio-${width}.png`),fullPage:true});
+        }
+        await page.setViewportSize({width:390,height:844});
+        await page.goto(live+'contato.html?area=familia');
+        assert.equal(await page.locator('#area').inputValue(),'familia');
+        await page.locator('#name').fill('Maria Exemplo');
+        await page.locator('#email').fill('pessoa@example.com');
+        await page.locator('#message').fill('Gostaria de analisar um contrato totalmente fictício.');
+        await page.locator('#consent').check();
+        await page.locator('button[type=submit]').click();
+        assert.equal(await page.locator('#contact-result').isVisible(),true);
+        await page.locator('#new-message').click();
+        assert.equal(await page.locator('#message').inputValue(),'');
+        const missing = await page.goto(live+'inexistente/exemplo');
+        assert.equal(missing.status(),404);
+        assert.equal(await page.locator('link[rel=stylesheet]').evaluate(e=>e.sheet!==null),true);
+        await page.locator('.brand').click();
+        assert.equal(page.url(),live+'index.html');
+        report.live = {url:live,pages:6,contact:'passed',nested404:'passed'};
+      }
       report.results.push({engine:engine.name(),version:browser.version(),pages:6,widths:[320,390,768,1024,1440],flow:'passed',noJS:'passed',networkAndStorage:'passed',nested404:'passed'});
       await noJS.close(); await context.close(); await browser.close(); browser = null;
     }
