@@ -1,0 +1,11 @@
+{
+  "name": "lm-advocacia-beta",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Site institucional fictício, estático, em HTML, CSS e JavaScript.",
+  "scripts": {
+    "check": "node --check assets/js/main.js",
+    "test": "node --test tests/contact.test.js"
+  },
+  "engines": { "node": ">=20" }
+}
