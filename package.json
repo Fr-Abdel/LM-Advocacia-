@@ -5,7 +5,13 @@
   "description": "Site institucional fictício, estático, em HTML, CSS e JavaScript.",
   "scripts": {
     "check": "node --check assets/js/main.js",
-    "test": "node --test tests/contact.test.js"
+    "test": "node --test tests/contact.test.js",
+    "test:browser": "node tests/browser.cjs"
   },
-  "engines": { "node": ">=20" }
+  "engines": {
+    "node": ">=20"
+  },
+  "devDependencies": {
+    "playwright": "1.62.1"
+  }
 }

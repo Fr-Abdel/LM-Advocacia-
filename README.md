@@ -4,6 +4,17 @@ Site institucional **inteiramente fictício**, criado como projeto de portfólio
 
 > Não representa um escritório real, não presta orientação jurídica e não encaminha mensagens. Use somente dados fictícios no formulário.
 
+**[Abrir demonstração pública](https://lm-advocacia-demo.brinyhawk.chatgpt.site/)** · [Ver verificações no GitHub Actions](https://github.com/Fr-Abdel/LM-Advocacia-/actions/workflows/quality.yml)
+
+![Página inicial em desktop, captura da implementação](docs/images/inicio-desktop.webp)
+
+<details>
+<summary>Ver a versão móvel</summary>
+
+![Página inicial em 390 px, captura da implementação](docs/images/inicio-mobile.webp)
+
+</details>
+
 ## Proposta e problema resolvido
 
 Para pessoas, famílias e pequenos negócios, a proposta visual é transmitir clareza, cuidado e critério. O visitante consegue entender o posicionamento, explorar áreas de atuação e experimentar uma jornada de primeiro contato sem depender de serviços externos.
@@ -57,9 +68,21 @@ npm test
 python tests/check_site.py
 ```
 
-Nenhum `npm install` é necessário. O workflow em `.github/workflows/quality.yml` executa as mesmas verificações em pushes para `main` e em pull requests. O status remoto precisa ser conferido no GitHub.
+Essas três verificações não exigem `npm install`. O workflow em `.github/workflows/quality.yml` executa as mesmas verificações em pushes para `main` e em pull requests. O status remoto precisa ser conferido no GitHub.
 
 Os testes conferem validação e formatação do contato, recursos e âncoras locais, IDs, referências ARIA, semântica básica e sete pares principais de contraste. Não substituem renderização, teste de interação, auditoria de segurança ou conformidade WCAG.
+
+### Navegadores e capturas
+
+Para executar a rodada de integração opcional:
+
+```bash
+npm ci
+npx playwright install --with-deps chromium firefox
+npm run test:browser
+```
+
+O Playwright é dependência de desenvolvimento; o site publicado permanece sem dependências externas de execução. A suíte revisa seis páginas em 320, 390, 768, 1024 e 1440 px, testa teclado, formulário, ausência de requisições/persistência e comportamento sem JavaScript. As capturas e o relatório ficam em `test-results/` e nos artefatos do Actions por 14 dias. O workflow também verifica a demonstração pública em Chromium; uma indisponibilidade externa pode fazer essa etapa falhar.
 
 ## Organização
 
@@ -83,6 +106,8 @@ LM-Advocacia-/
 ├── tests/
 │   ├── contact.test.js
 │   └── check_site.py
+├── scripts/build-static.mjs
+├── .openai/hosting.json
 ├── .github/workflows/quality.yml
 └── package.json
 ```
@@ -99,4 +124,4 @@ A direção visual usa vinho, marfim, tons de pedra e tipografia serifada. A ilu
 - [Critérios de aceite, testes manuais e evidências](docs/ACEITE-E-TESTES.md)
 - [Roteiro de publicação e próximos incrementos](docs/PUBLICACAO.md)
 
-**Estado da entrega:** código beta preparado para revisão. Publicação da demonstração e verificações visuais ainda precisam ser realizadas conforme os documentos acima.
+**Estado da entrega:** demonstração publicada no Sites, com revisão de capturas e testes de navegador documentados em [Aceite e testes](docs/ACEITE-E-TESTES.md). GitHub Pages permanece como alternativa; a URL do Pages não é a demonstração ativa. Leitor de tela, aparelho móvel real e Safari/iOS não foram avaliados. Não há alegação de conformidade integral com WCAG nem de resultados comerciais.
