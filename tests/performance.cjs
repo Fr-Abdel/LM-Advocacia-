@@ -25,7 +25,7 @@ const {startServer} = require('./site-server.cjs');
       console.log(JSON.stringify({name,scores,lcpMs:sample.lcpMs,cls:sample.cls,tbtMs:sample.tbtMs}));
     }
     const median=key=>samples.slice(0,3).map(s=>s[key]).sort((a,b)=>a-b)[1];
-    const summary={date:new Date().toISOString(),lighthouseVersion:require('lighthouse/package.json').version,environment:'GitHub Actions Ubuntu; servidor estático local; throttling simulado do Lighthouse',samples,homeMobileMedian:{lcpMs:median('lcpMs'),cls:median('cls'),tbtMs:median('tbtMs')},inp:'não medido; exige instrumentação de interações ou dados reais. TBT não é INP.',seo:'noindex intencional para o projeto fictício; pontuação não é promovida por remoção dessa proteção.'};
+    const summary={date:new Date().toISOString(),lighthouseVersion:require('lighthouse/package.json').version,environment:`${process.env.GITHUB_ACTIONS ? 'GitHub Actions Ubuntu' : 'Execução local'}; servidor estático local; throttling simulado do Lighthouse`,nodeVersion:process.version,samples,homeMobileMedian:{lcpMs:median('lcpMs'),cls:median('cls'),tbtMs:median('tbtMs')},inp:'não medido; exige instrumentação de interações ou dados reais. TBT não é INP.',seo:'noindex intencional para o projeto fictício; pontuação não é promovida por remoção dessa proteção.'};
     await fs.writeFile(path.join(out,'summary.json'),JSON.stringify(summary,null,2)+'\n');
     assert.ok(summary.homeMobileMedian.lcpMs<=2500,'LCP mediano mobile acima do alvo');
     assert.ok(summary.homeMobileMedian.cls<=0.1,'CLS mediano mobile acima do alvo');

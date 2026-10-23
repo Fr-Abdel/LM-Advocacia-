@@ -1,5 +1,5 @@
 {
-  "date": "2026-10-20T17:36:36.476Z",
+  "date": "2026-10-23T14:46:42.954Z",
   "results": [
     {
       "engine": "chromium",
@@ -7,10 +7,12 @@
       "pages": 6,
       "widths": [
         320,
+        360,
         390,
         768,
         1024,
-        1440
+        1440,
+        1920
       ],
       "flow": "passed",
       "noJS": "passed",
@@ -23,10 +25,12 @@
       "pages": 6,
       "widths": [
         320,
+        360,
         390,
         768,
         1024,
-        1440
+        1440,
+        1920
       ],
       "flow": "passed",
       "noJS": "passed",
@@ -34,10 +38,66 @@
       "nested404": "passed"
     }
   ],
-  "live": {
-    "url": "https://lm-advocacia-demo.brinyhawk.chatgpt.site/",
-    "pages": 6,
-    "contact": "passed",
-    "nested404": "passed"
-  }
+  "accessibility": [
+    {
+      "page": "index.html",
+      "width": 360,
+      "violations": []
+    },
+    {
+      "page": "escritorio.html",
+      "width": 360,
+      "violations": []
+    },
+    {
+      "page": "atuacao.html",
+      "width": 360,
+      "violations": []
+    },
+    {
+      "page": "contato.html",
+      "width": 360,
+      "violations": []
+    },
+    {
+      "page": "privacidade.html",
+      "width": 360,
+      "violations": []
+    },
+    {
+      "page": "404.html",
+      "width": 360,
+      "violations": []
+    },
+    {
+      "page": "index.html",
+      "width": 1440,
+      "violations": []
+    },
+    {
+      "page": "escritorio.html",
+      "width": 1440,
+      "violations": []
+    },
+    {
+      "page": "atuacao.html",
+      "width": 1440,
+      "violations": []
+    },
+    {
+      "page": "contato.html",
+      "width": 1440,
+      "violations": []
+    },
+    {
+      "page": "privacidade.html",
+      "width": 1440,
+      "violations": []
+    },
+    {
+      "page": "404.html",
+      "width": 1440,
+      "violations": []
+    }
+  ]
 }

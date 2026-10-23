@@ -164,6 +164,7 @@ const output = path.join(root, 'test-results');
         await page.locator('.brand').click();
         assert.ok(['/', '/index', '/index.html'].includes(new URL(page.url()).pathname));
         assert.match(await page.title(),/Início/);
+        assert.deepEqual(errors,[], 'Erros na publicação');
         report.live = {url:live,pages:6,contact:'passed',nested404:'passed'};
       }
       report.results.push({engine:engine.name(),version:browser.version(),pages:6,widths,flow:'passed',noJS:'passed',networkAndStorage:'passed',nested404:'passed'});
