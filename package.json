@@ -1,17 +1,22 @@
 {
   "name": "lm-advocacia-beta",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "private": true,
   "description": "Site institucional fictício, estático, em HTML, CSS e JavaScript.",
   "scripts": {
-    "check": "node --check assets/js/main.js",
+    "check": "node --check assets/js/main.js && node --check scripts/build-static.mjs && node --check tests/browser.cjs && node --check tests/performance.cjs && node --check tests/site-server.cjs",
     "test": "node --test tests/contact.test.js",
-    "test:browser": "node tests/browser.cjs"
+    "test:browser": "node tests/browser.cjs",
+    "build": "node scripts/build-static.mjs",
+    "test:performance": "node tests/performance.cjs"
   },
   "engines": {
-    "node": ">=20"
+    "node": ">=22.19.0"
   },
   "devDependencies": {
+    "axe-core": "4.14.0",
+    "chrome-launcher": "1.2.2",
+    "lighthouse": "13.5.0",
     "playwright": "1.62.1"
   }
 }

@@ -1,6 +1,6 @@
-# LM Advocacia · Beta 0.1
+# LM Advocacia · Beta 0.2
 
-Site institucional **inteiramente fictício**, criado como projeto de portfólio em HTML, CSS e JavaScript. A beta transforma o conceito inicial do repositório em uma experiência navegável com identidade visual, conteúdo, quatro áreas conceituais e contato demonstrativo.
+Site institucional **inteiramente fictício**, criado como projeto de portfólio em HTML, CSS e JavaScript. O projeto transforma o conceito inicial do repositório em uma experiência navegável com identidade visual, conteúdo, quatro áreas conceituais e contato demonstrativo.
 
 > Não representa um escritório real, não presta orientação jurídica e não encaminha mensagens. Use somente dados fictícios no formulário.
 
@@ -14,6 +14,8 @@ Site institucional **inteiramente fictício**, criado como projeto de portfólio
 ![Página inicial em 390 px, captura da implementação](docs/images/inicio-mobile.webp)
 
 </details>
+
+A beta 0.2 refina a composição editorial, separa as quatro áreas no início e facilita o contato com um exemplo fictício e contador. A revisão inclui testes do pacote de produção, sete larguras, axe e Lighthouse. [Ler diagnóstico, resultados e 15 critérios de aceite](docs/REVISAO-BETA-02.md).
 
 ## Proposta e problema resolvido
 
@@ -60,7 +62,7 @@ Abrir `http://localhost:5500`. No Windows, `py -m http.server 5500` é uma alter
 
 ## Verificar
 
-Node.js 20 ou superior e Python 3 são necessários apenas para as verificações:
+Node.js 22.19 ou superior e Python 3 são necessários apenas para as verificações:
 
 ```bash
 npm run check
@@ -79,10 +81,12 @@ Para executar a rodada de integração opcional:
 ```bash
 npm ci
 npx playwright install --with-deps chromium firefox
+npm run build
 npm run test:browser
+npm run test:performance
 ```
 
-O Playwright é dependência de desenvolvimento; o site publicado permanece sem dependências externas de execução. A suíte revisa seis páginas em 320, 390, 768, 1024 e 1440 px, testa teclado, formulário, ausência de requisições/persistência e comportamento sem JavaScript. As capturas e o relatório ficam em `test-results/` e nos artefatos do Actions por 14 dias. O workflow também verifica a demonstração pública em Chromium; uma indisponibilidade externa pode fazer essa etapa falhar.
+O Playwright é dependência de desenvolvimento; o site publicado permanece sem dependências externas de execução. A suíte revisa seis páginas em 320, 360, 390, 768, 1024, 1440 e 1920 px, testa teclado, formulário, ausência de requisições/persistência e comportamento sem JavaScript. As capturas e o relatório ficam em `test-results/` e nos artefatos do Actions por 14 dias. Em PRs, o workflow verifica o pacote local. Em pushes na `main`, verifica também a demonstração pública em Chromium; uma indisponibilidade externa pode fazer essa etapa falhar. O Lighthouse registra cinco amostras de laboratório; SEO permanece limitado pelo `noindex` intencional e INP real não é medido.
 
 ## Organização
 
@@ -102,10 +106,15 @@ LM-Advocacia-/
 ├── docs/
 │   ├── ESCOPO.md
 │   ├── ACEITE-E-TESTES.md
-│   └── PUBLICACAO.md
+│   ├── PUBLICACAO.md
+│   ├── REVISAO-BETA-02.md
+│   └── evidence/
 ├── tests/
 │   ├── contact.test.js
-│   └── check_site.py
+│   ├── check_site.py
+│   ├── site-server.cjs
+│   ├── browser.cjs
+│   └── performance.cjs
 ├── scripts/build-static.mjs
 ├── .openai/hosting.json
 ├── .github/workflows/quality.yml
@@ -118,7 +127,7 @@ As páginas são HTML explícito para facilitar estudo e edição. Cabeçalho e 
 
 A stack acompanha o estágio atual de estudo: HTML semântico, CSS com Grid/Flexbox e JavaScript sem framework. Não há backend, contas, analytics, cookies de aplicação, mapa incorporado ou canal real de contato. Não foram inventados advogados, inscrições profissionais, depoimentos, prêmios, endereços ou resultados.
 
-A direção visual usa vinho, marfim, tons de pedra e tipografia serifada. A ilustração representa passagem, equilíbrio e continuidade; não é fotografia de uma sede.
+A direção visual preserva vinho, marfim, tons de pedra e tipografia serifada. A ilustração representa passagem, equilíbrio e continuidade; não é fotografia de uma sede.
 
 - [Escopo e decisões](docs/ESCOPO.md)
 - [Critérios de aceite, testes manuais e evidências](docs/ACEITE-E-TESTES.md)

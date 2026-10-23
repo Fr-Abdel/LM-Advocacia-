@@ -1,4 +1,4 @@
-# Escopo da beta 0.1
+# Escopo da beta 0.2
 
 ## Ponto de partida e resultado
 
@@ -50,3 +50,7 @@ A demonstração foi publicada no Sites, mantendo este repositório. Foram acres
 A entrega deve entrar em uma branch de implementação e pull request, permitindo comparar os arquivos antes da integração. Nenhuma configuração de GitHub Pages é alterada nesta etapa. É possível encerrar o pull request para descartar a proposta; após integração, reverter o commit preserva o histórico.
 
 Qualquer transformação em site de um escritório real constitui novo escopo: identidade e profissionais verificados, conteúdo aprovado, regras aplicáveis revisadas e tratamento de dados definido antes de conectar um canal de atendimento.
+
+## Beta 0.2 · 23/10/2026
+
+Refinamento editorial da identidade existente; quatro áreas independentes no início; índice de áreas semântico; campos de 16 px, exemplo fictício e contador; nome acessível da marca corrigido; empacotamento com limpeza da saída. Validação em sete larguras, axe e Lighthouse, sem dependências no site publicado. O diagnóstico e os resultados estão em `REVISAO-BETA-02.md`.

@@ -16,11 +16,12 @@ npm test
 python3 tests/check_site.py
 npm ci
 npx playwright install --with-deps chromium firefox
+npm run build
 npm run test:browser
-node scripts/build-static.mjs
+npm run test:performance
 ```
 
-O último comando prepara `dist/` para hospedagem na raiz. Ele mantém os caminhos relativos e ajusta somente a base da página 404 para `/`. Publicar a pasta `dist/` pela mesma hospedagem após as verificações; manter o mesmo projeto e acesso público. Fazer um commit no GitHub **não** publica automaticamente no Sites. Para atualizar esta hospedagem com o ChatGPT, solicitar publicação do projeto já identificado em `.openai/hosting.json`; não criar outra cópia do Site.
+O comando de build prepara `dist/` para hospedagem na raiz. Ele mantém os caminhos relativos e ajusta somente a base da página 404 para `/`. Publicar a pasta `dist/` pela mesma hospedagem após as verificações; manter o mesmo projeto e acesso público. Fazer um commit no GitHub **não** publica automaticamente no Sites. Para atualizar esta hospedagem com o ChatGPT, solicitar publicação do projeto já identificado em `.openai/hosting.json`; não criar outra cópia do Site.
 
 A publicação pelo Sites salva uma versão e permite voltar a uma versão anterior se um defeito for identificado. No GitHub, usar reversão de commit, preservando o histórico. Revalidar a URL pública depois de cada alteração de HTML, CSS ou JavaScript.
 
@@ -38,7 +39,7 @@ O `404.html` de origem já usa `/LM-Advocacia-/`, adequado ao Pages deste reposi
 
 ## Apresentação no portfólio
 
-Apresentar como **projeto autoral fictício**: site institucional em HTML, CSS e JavaScript, identidade visual sóbria, navegação responsiva e prévia de contato com estados de erro. As capturas do README provêm do navegador, sem mockups.
+Apresentar como **projeto autoral fictício**: site institucional em HTML, CSS e JavaScript, identidade visual sóbria, navegação responsiva e prévia de contato com estados de erro. As capturas do README provêm do pacote de produção renderizado em Chromium, sem mockups. A revisão 0.2 e suas métricas estão em `REVISAO-BETA-02.md`.
 
 Não declarar escritório atendido, inscrições profissionais, conversões, faturamento ou resultados de clientes. Não há envio, backend ou analytics. Manter `noindex, nofollow` e os avisos de ficção; eles não são controle de acesso.
 
