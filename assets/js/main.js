@@ -50,17 +50,22 @@
       }
     });
     document.addEventListener('pointerdown', (event) => {
-      if (!nav.contains(event.target)) navHadFocus = false;
+      if (!nav.contains(event.target)) {
+        navHadFocus = false;
+        if (breakpoint.matches && !button.contains(event.target)) closeMenu();
+      }
     });
     function closeMenu(restoreFocus = false) {
       nav.classList.remove('is-open');
       button.setAttribute('aria-expanded', 'false');
+      button.setAttribute('aria-label', 'Abrir menu');
       if (restoreFocus) button.focus();
     }
     button.addEventListener('click', () => {
       const open = button.getAttribute('aria-expanded') !== 'true';
       nav.classList.toggle('is-open', open);
       button.setAttribute('aria-expanded', String(open));
+      button.setAttribute('aria-label', open ? 'Fechar menu' : 'Abrir menu');
     });
     nav.addEventListener('click', (event) => {
       if (event.target.closest('a') && breakpoint.matches) closeMenu();
@@ -83,7 +88,11 @@
     const preview = document.querySelector('#message-preview');
     const copyButton = document.querySelector('#copy-message');
     const copyStatus = document.querySelector('#copy-status');
+    const count = document.querySelector('#message-count');
     const ids = ['name', 'email', 'area', 'message', 'consent'];
+    function updateCount() {
+      count.textContent = `${form.elements.message.value.length} / 1.000`;
+    }
     let attempted = false;
     let generation = 0;
 
@@ -139,6 +148,7 @@
       result.focus();
     });
     form.addEventListener('input', () => {
+      updateCount();
       if (attempted) renderErrors(validateContact(readData()));
     });
     document.querySelector('#edit-message').addEventListener('click', () => {
@@ -150,6 +160,7 @@
     document.querySelector('#new-message').addEventListener('click', () => {
       generation++;
       form.reset();
+      updateCount();
       attempted = false;
       renderErrors({});
       preview.textContent = '';
@@ -170,6 +181,17 @@
         }
       });
     }
+    document.querySelector('#fill-example').addEventListener('click', () => {
+      form.elements.name.value = 'Maria Exemplo';
+      form.elements.email.value = 'pessoa@example.com';
+      if (!form.elements.area.value) form.elements.area.value = 'civil';
+      form.elements.message.value = 'Gostaria de entender como seria a análise de um contrato inteiramente fictício de prestação de serviços.';
+      updateCount();
+      if (attempted) renderErrors(validateContact(readData()));
+      // O reconhecimento da demonstração continua sendo uma escolha explícita.
+      form.elements.consent.focus();
+    });
+    updateCount();
     // Ativa o formulário somente após registrar os manipuladores de segurança.
     form.noValidate = true;
     fields.disabled = false;

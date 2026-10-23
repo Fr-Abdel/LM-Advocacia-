@@ -8,6 +8,9 @@
     <meta name="robots" content="noindex, nofollow">
     <meta property="og:title" content="Contato demonstrativo | LM Advocacia — projeto fictício">
     <meta property="og:description" content="Experimente um formulário acessível com validação e prévia local. Esta demonstração não envia ou armazena mensagens.">
+    <link rel="canonical" href="https://lm-advocacia-demo.brinyhawk.chatgpt.site/contato">
+    <meta property="og:url" content="https://lm-advocacia-demo.brinyhawk.chatgpt.site/contato">
+    <meta property="og:site_name" content="LM Advocacia · projeto fictício">
     <meta property="og:type" content="website">
     <meta property="og:locale" content="pt_BR">
     <title>
@@ -24,9 +27,7 @@
     </a>
     <div class="demo-bar">
       <div class="container">
-        <span class="demo-dot" aria-hidden="true">
-        </span>
-        Projeto de portfólio · Escritório fictício · Beta 0.1
+        <span class="demo-description"><span class="demo-dot" aria-hidden="true"></span>Projeto de portfólio · Escritório fictício</span><span class="demo-edition">ESTUDO INSTITUCIONAL / 02</span>
       </div>
     </div>
     <header class="site-header">
@@ -153,6 +154,7 @@
               <legend class="sr-only">
                 Dados fictícios para a demonstração
               </legend>
+              <div class="example-toolbar"><p>Uma experiência, apenas com dados fictícios.</p><button class="text-link" id="fill-example" type="button">Usar exemplo fictício <span aria-hidden="true">↗</span></button></div>
               <div class="field">
                 <label for="name">
                   Nome fictício
@@ -200,9 +202,9 @@
                 <label for="message">
                   Mensagem de exemplo
                 </label>
-                <textarea id="message" name="message" rows="5" required minlength="20" maxlength="1000" aria-describedby="message-hint message-error" placeholder="Ex.: Gostaria de entender como seria a análise de um contrato fictício de prestação de serviços."></textarea>
+                <textarea id="message" name="message" rows="5" required minlength="20" maxlength="1000" aria-describedby="message-hint message-count message-error" placeholder="Ex.: Gostaria de entender como seria a análise de um contrato fictício de prestação de serviços."></textarea>
                 <span class="field-hint" id="message-hint">
-                  Entre 20 e 1.000 caracteres. Não inclua dados sensíveis.
+                  <span>Entre 20 e 1.000 caracteres. Sem dados sensíveis.</span><output id="message-count" for="message" aria-live="off">0 / 1.000</output>
                 </span>
                 <span class="field-error" id="message-error">
                 </span>
