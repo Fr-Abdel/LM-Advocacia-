@@ -36,7 +36,7 @@ const output = path.join(root, 'test-results');
           if (engine === chromium && [360,1440].includes(width)) {
             await page.addScriptTag({path:require.resolve('axe-core/axe.min.js')});
             const audit = await page.evaluate(async()=>{
-              const result=await axe.run(document,{runOnly:{type:'tag',values:['wcag2a','wcag2aa','wcag21aa','wcag22aa']}});
+              const result=await axe.run(document,{runOnly:{type:'tag',values:['wcag2a','wcag2aa','wcag21a','wcag21aa','wcag22a','wcag22aa']}});
               return result.violations.map(v=>({id:v.id,impact:v.impact,nodes:v.nodes.map(n=>({target:n.target,summary:n.failureSummary}))}));
             });
             report.accessibility ??= [];
