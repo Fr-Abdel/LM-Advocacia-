@@ -64,7 +64,7 @@ Execução aprovada: [39972455186](https://github.com/Fr-Abdel/LM-Advocacia-/act
 | Testes unitários | 8 de 8 aprovados |
 | Estrutura | 6 páginas, 97 links/recursos locais e referências ARIA |
 | Responsividade | 6 páginas × 7 larguras × 2 motores = 84 combinações, sem overflow horizontal |
-| Capturas | 42 capturas Chromium,320/360/390/768/1024/1440/1920 px; revisão visual concluída sem corte ou sobreposição observados |
+| Capturas | 42 capturas Chromium, 320/360/390/768/1024/1440/1920 px; revisão visual concluída sem corte ou sobreposição observados |
 | axe | 12 auditorias: seis páginas em 360/1440 px; zero violações nas regras selecionadas WCAG 2 A/AA, 2.1 A/AA e 2.2 A/AA |
 | Fluxos | Menu, teclado, âncoras, validação, exemplo, contador, prévia literal, edição, limpeza e cópia simulada aprovados |
 | Sem JS / 404 / privacidade | Navegação e FAQ sem JS, campos desativados, 404 raiz/subpasta, zero requisições de formulário e zero persistência de aplicação no percurso |
@@ -86,7 +86,7 @@ Evidências persistidas: `docs/evidence/browser-report.json`, `docs/evidence/lig
 
 A consulta `npm audit` registrou zero vulnerabilidades conhecidas nas 117 dependências auditadas em 23/10/2026. Isso não equivale a ausência universal de vulnerabilidades. Há aviso de depreciação em dependência transitiva de auditoria (`@opentelemetry/sdk-trace-base`), sem dependência dessa biblioteca no site publicado; não foram aplicados overrides incompatíveis apenas para silenciar o aviso.
 
-Lighthouse mede laboratório, em servidor local no runner, com throttling documentado em cada amostra. Não fornece dados reais de usuários. INP não será deduzido de TBT. O SEO pode ficar abaixo do alvo pela exclusão intencional de indexação; não remover `noindex` para elevar pontuação.
+Lighthouse mede laboratório, em servidor local no runner, com throttling documentado em cada amostra. Não fornece dados reais de usuários. INP não foi deduzido de TBT. O SEO pode ficar abaixo do alvo pela exclusão intencional de indexação; não remover `noindex` para elevar pontuação.
 
 ## 6. Critérios de aceite
 
@@ -105,7 +105,7 @@ Lighthouse mede laboratório, em servidor local no runner, com throttling docume
 |11|SEO adequado à demonstração|Aprovado para a natureza fictícia; meta numérica 95 não atingida pelo noindex intencional|
 |12|Integridade de dados/credenciais|Aprovado na revisão de conteúdo e código|
 |13|Regressões|Aprovado nos percursos; nenhuma regressão conhecida após a rodada|
-|14|Preparação para publicação|Aprovado pelo pacote e CI; confirmação da implantação no fechamento|
+|14|Preparação para publicação|Aprovado pelo pacote e CI; smoke test externo previsto na main|
 |15|Documentação de limites|Aprovado — evidências e pendências discriminadas|
 
 Alvos adicionais: SEO 95 **reprovado como pontuação**, mantido como exceção intencional de produto; INP real **não verificado**; revisão com leitor de tela/aparelho físico **pendente**. Nenhum desses itens é anunciado como aprovado integralmente.
@@ -120,4 +120,4 @@ A auditoria axe não certifica WCAG 2.2 AA integralmente. Capturas não comprova
 
 A publicação existente é pública e continua vinculada ao mesmo projeto Sites. O pacote adapta somente a base da 404; caminhos relativos e conteúdo permanecem equivalentes. Nenhuma variável de ambiente de produção é necessária. Credenciais não integram fonte ou pacote.
 
-Publicar apenas a versão verificada; conservar a versão anterior para reversão. O status final da implantação, o PR e as capturas serão registrados no fechamento.
+A entrega está no [PR #4](https://github.com/Fr-Abdel/LM-Advocacia-/pull/4), com código, documentação e capturas versionadas. Publicar somente após o CI aprovado, conservar a versão anterior para reversão e conferir o smoke test externo da main. O resultado da implantação é informado na entrega; os relatórios deste documento correspondem à execução de referência citada.

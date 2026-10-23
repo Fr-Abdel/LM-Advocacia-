@@ -1,4 +1,4 @@
-# Escopo da beta 0.1
+# Escopo da beta 0.2
 
 ## Ponto de partida e resultado
 

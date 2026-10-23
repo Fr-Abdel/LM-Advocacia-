@@ -10,12 +10,12 @@ A revisão atual de 23/10/2026 está detalhada em [Diagnóstico, métricas e 15 
 |A02|Marca fictícia e ausência de canais reais|Aprovado na revisão|
 |A03|Rejeição de dados inválidos|Aprovado;8 testes unitários e fluxo de erros|
 |A04|Prévia, edição e limpeza|Aprovado nos dois motores; exemplo e contador também verificados|
-|A05|Sem overflow horizontal|Aprovado;84 combinações em 320–1920 px, com42 capturas revisadas|
+|A05|Sem overflow horizontal|Aprovado; 84 combinações em 320–1920 px, com 42 capturas revisadas|
 |A06|Teclado e foco|Aprovado no percurso automatizado; tabulação manual integral recomendada|
 |A07|Leitor de tela|Pendente de NVDA/VoiceOver; axe não certifica conformidade integral|
 |A08|Conteúdo e navegação sem JS|Aprovado no percurso testado; formulário desativado|
 |A09|Sem envio ou persistência da aplicação|Aprovado no código e na observação do fluxo local|
-|A10|Pacote e 404 compatíveis|Aprovado na raiz e na simulação de subpasta; publicação verificada no fechamento|
+|A10|Pacote e 404 compatíveis|Aprovado na raiz e na simulação de subpasta; verificação externa é executada na main|
 
 A auditoria axe inclui WCAG 2 A/AA, 2.1 A/AA e 2.2 A/AA e encontrou zero violações nos 12 scans das seis páginas em 360/1440 px. Isso não constitui certificação de WCAG. Lighthouse mede laboratório; INP real não foi medido. A meta SEO 95 não foi atingida por `noindex` intencional.
 
