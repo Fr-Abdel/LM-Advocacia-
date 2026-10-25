@@ -1,0 +1,103 @@
+{
+  "date": "2026-10-25T01:14:37.296Z",
+  "sourceCommit": null,
+  "url": "https://lm-advocacia-demo.brinyhawk.chatgpt.site/",
+  "files": [
+    {
+      "file": "404.html",
+      "status": 200,
+      "url": "https://lm-advocacia-demo.brinyhawk.chatgpt.site/404",
+      "comparison": "cloudflare-injection",
+      "expectedSha256": "8900db153a9b1905f2570d4465007811c33445d870bdb123740863210c83bdf0",
+      "servedSha256": "0b4e572fe4f57ffa714f2aa679131fb50da097e61549270fa8f92721e853cbda",
+      "passed": true
+    },
+    {
+      "file": "assets/architecture.svg",
+      "status": 200,
+      "url": "https://lm-advocacia-demo.brinyhawk.chatgpt.site/assets/architecture.svg",
+      "comparison": "exact",
+      "expectedSha256": "2a4769ef91ab7594e2a6893d035dd55f29b6d226654f69a088337c2e33056d18",
+      "servedSha256": "2a4769ef91ab7594e2a6893d035dd55f29b6d226654f69a088337c2e33056d18",
+      "passed": true
+    },
+    {
+      "file": "assets/css/styles.css",
+      "status": 200,
+      "url": "https://lm-advocacia-demo.brinyhawk.chatgpt.site/assets/css/styles.css",
+      "comparison": "exact",
+      "expectedSha256": "ec7ac04843e7c1203cb8d6169b72b2c835c25be72f65f5e91291ce2287a6e4a3",
+      "servedSha256": "ec7ac04843e7c1203cb8d6169b72b2c835c25be72f65f5e91291ce2287a6e4a3",
+      "passed": true
+    },
+    {
+      "file": "assets/favicon.svg",
+      "status": 200,
+      "url": "https://lm-advocacia-demo.brinyhawk.chatgpt.site/assets/favicon.svg",
+      "comparison": "exact",
+      "expectedSha256": "b62e7eca15e412b17822caa1210a73018aa681afe5b09cfc84121ad81447cefd",
+      "servedSha256": "b62e7eca15e412b17822caa1210a73018aa681afe5b09cfc84121ad81447cefd",
+      "passed": true
+    },
+    {
+      "file": "assets/js/main.js",
+      "status": 200,
+      "url": "https://lm-advocacia-demo.brinyhawk.chatgpt.site/assets/js/main.js",
+      "comparison": "exact",
+      "expectedSha256": "01edd6387549ed19127b61f906e67509b9efd1ed56ba7e87a574adbf5e6f6128",
+      "servedSha256": "01edd6387549ed19127b61f906e67509b9efd1ed56ba7e87a574adbf5e6f6128",
+      "passed": true
+    },
+    {
+      "file": "atuacao.html",
+      "status": 200,
+      "url": "https://lm-advocacia-demo.brinyhawk.chatgpt.site/atuacao",
+      "comparison": "cloudflare-injection",
+      "expectedSha256": "bb15a9ddbeac60f524ab63c07a1baa48a2e80fd34fe64838ae9360f5fea35c6e",
+      "servedSha256": "c6da282f7b5c0d7e8e4741d39e729c76cfcf57bd8f3d161f06969a37296ab929",
+      "passed": true
+    },
+    {
+      "file": "contato.html",
+      "status": 200,
+      "url": "https://lm-advocacia-demo.brinyhawk.chatgpt.site/contato",
+      "comparison": "cloudflare-injection",
+      "expectedSha256": "e8f816791ec1c68c0991bce3eddd3eb0979886a4ba202f8160be6bf27ee750bd",
+      "servedSha256": "fd585d52ce1ac6b3b02940f7027d51f8391e88f357f297b700a023ac0d3efe0c",
+      "passed": true
+    },
+    {
+      "file": "escritorio.html",
+      "status": 200,
+      "url": "https://lm-advocacia-demo.brinyhawk.chatgpt.site/escritorio",
+      "comparison": "cloudflare-injection",
+      "expectedSha256": "b43df490e90cd385c01488a225d38bd4dc8232f5f3e4fa630b035be4460053b6",
+      "servedSha256": "fbca8dc490dc0d1edaa7c0bd5e84ac50c40f708afca48a991f7994673e24b4ac",
+      "passed": true
+    },
+    {
+      "file": "index.html",
+      "status": 200,
+      "url": "https://lm-advocacia-demo.brinyhawk.chatgpt.site/",
+      "comparison": "cloudflare-injection",
+      "expectedSha256": "9df7bdda3ca5b56187d608096d03ba4143766d7bfbc2faa66b3d2e5d174b25a8",
+      "servedSha256": "1e0f7450f627d9e0598b96378ae8e4ff269d6114a37645c9c240ed52b57db76e",
+      "passed": true
+    },
+    {
+      "file": "privacidade.html",
+      "status": 200,
+      "url": "https://lm-advocacia-demo.brinyhawk.chatgpt.site/privacidade",
+      "comparison": "cloudflare-injection",
+      "expectedSha256": "6ec390d833589566c61793e2f203238a36bb0ba340b89a109953c74dd0b24342",
+      "servedSha256": "fc5d7c9d0c51f900e0311f6593cf09550d3876ba21dd07c2672a6d3b6e96989e",
+      "passed": true
+    }
+  ],
+  "passed": true,
+  "scope": "Conte�do do pacote dist; permite somente a inser��o Cloudflare identificada. N�o mede UX, privacidade do provedor ou desempenho p�blico.",
+  "referenceCommit": "0928375084a11d486610857d6faa76b0509ffa50",
+  "hostedVersion": 5,
+  "hostedSourceCommit": "72177531e3cecbcf9ad9a25f7f3d429ea92afaa4"
+}
+
