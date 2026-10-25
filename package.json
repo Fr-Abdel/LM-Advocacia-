@@ -4,11 +4,12 @@
   "private": true,
   "description": "Site institucional fictício, estático, em HTML, CSS e JavaScript.",
   "scripts": {
-    "check": "node --check assets/js/main.js && node --check scripts/build-static.mjs && node --check tests/browser.cjs && node --check tests/performance.cjs && node --check tests/site-server.cjs",
-    "test": "node --test tests/contact.test.js",
+    "check": "node --check assets/js/main.js && node --check scripts/build-static.mjs && node --check tests/browser.cjs && node --check tests/performance.cjs && node --check tests/site-server.cjs && node --check tests/published.cjs",
+    "test": "node --test tests/contact.test.js tests/published.test.cjs",
     "test:browser": "node tests/browser.cjs",
     "build": "node scripts/build-static.mjs",
-    "test:performance": "node tests/performance.cjs"
+    "test:performance": "node tests/performance.cjs",
+    "test:published": "node tests/published.cjs"
   },
   "engines": {
     "node": ">=22.19.0"

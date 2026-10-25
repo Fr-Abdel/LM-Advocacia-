@@ -35,6 +35,11 @@ jobs:
       - run: npm run test:browser
         env:
           LIVE_URL: ${{ github.event_name == 'push' && 'https://lm-advocacia-demo.brinyhawk.chatgpt.site' || '' }}
+      - name: Conferir integridade da publicação
+        if: github.event_name == 'push'
+        run: npm run test:published
+        env:
+          LIVE_URL: https://lm-advocacia-demo.brinyhawk.chatgpt.site
       - run: npm run test:performance
       - uses: actions/upload-artifact@v4
         if: always()

@@ -44,3 +44,22 @@ Apresentar como **projeto autoral fictício**: site institucional em HTML, CSS e
 Não declarar escritório atendido, inscrições profissionais, conversões, faturamento ou resultados de clientes. Não há envio, backend ou analytics. Manter `noindex, nofollow` e os avisos de ficção; eles não são controle de acesso.
 
 Próximas melhorias opcionais: validar com NVDA/VoiceOver e aparelho móvel real; avaliar Safari/iOS, zoom real e cópia bem-sucedida; medir desempenho com relatório e ambiente identificados. Um vídeo curto pode complementar as capturas. Nenhum canal real de atendimento deve ser adicionado sem novo escopo e destinatário autorizado.
+
+## Conferir a correspondência da publicação
+
+Após publicar ou ao investigar divergência entre GitHub e Sites, gerar o pacote e comparar seu conteúdo com a URL pública. O comando não instala dependências nem publica:
+
+```powershell
+npm run build
+$env:LIVE_URL = 'https://lm-advocacia-demo.brinyhawk.chatgpt.site'
+npm run test:published
+Remove-Item Env:LIVE_URL
+```
+
+Em shells POSIX: `LIVE_URL=https://lm-advocacia-demo.brinyhawk.chatgpt.site npm run test:published`.
+
+O relatório `test-results/published-report.json` identifica URL final, status HTTP, hashes SHA-256 e resultado de cada arquivo. Os seis HTMLs são comparados com o pacote da raiz; os quatro assets são comparados integralmente. A hospedagem pode inserir um script Cloudflare antes de `</body>`: o comparador identifica essa única inserção, mantendo a comparação integral do HTML original. Uma alteração desse mecanismo exige investigação; não ampliar a exceção para ocultar divergências. A presença desse script também impede estender a observação local de ausência de requisições/cookies à infraestrutura do provedor.
+
+Na conferência posterior da beta 0.2, a versão Sites **5**, com implantação concluída em 23/10/2026, correspondeu aos dez arquivos públicos de `0928375084a11d486610857d6faa76b0509ffa50`. A origem interna do Sites é `72177531e3cecbcf9ad9a25f7f3d429ea92afaa4`; ela pertence ao repositório da hospedagem e não é um commit do GitHub público. SHAs diferentes entre esses repositórios não provam divergência de conteúdo. Evidência preservada em [publication-beta-02.json](evidence/publication-beta-02.json), com horário UTC.
+
+O workflow mantém PRs sem acesso à demonstração. Em pushes na `main`, executa o smoke test público e a comparação de conteúdo, além dos testes locais. Uma mudança de HTML/CSS/JS ainda não implantada deve falhar na comparação pública; após a implantação validada, repetir o workflow. Indisponibilidade, bloqueio do provedor ou divergência não significam automaticamente defeito no pacote local. O CI não deve ser apresentado como mecanismo de deploy.

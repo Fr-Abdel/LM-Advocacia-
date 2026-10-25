@@ -38,6 +38,7 @@ Executar em navegador atual no desktop e em pelo menos um aparelho móvel real. 
 | M11 | No GitHub Pages, abrir todas as páginas, áreas com âncoras, recursos e caminho inexistente como `inexistente/exemplo` | Sem recursos 404 nas páginas existentes; página personalizada recupera navegação e carrega estilos no caminho do projeto |
 | M12 | Aplicar zoom de 200% e 400% em janela desktop de 1280 px e preferência de movimento reduzido | Conteúdo reorganiza sem perda de controle ou informação; rolagem animada é desativada |
 | M13 | Testar Chrome/Edge e Firefox atuais, além de Safari/iOS se disponível | Formulário e navegação mantêm funcionamento equivalente; diferenças visuais não impedem uso |
+| M14 | Acionar “Usar exemplo fictício”, confirmar explicitamente, editar e limpar | Exemplo não marca a confirmação; contador acompanha os campos e volta a zero após limpar |
 
 Não marcar a beta como visualmente revisada ou totalmente acessível antes de concluir os casos correspondentes. Lighthouse e axe podem ajudar posteriormente, mas não substituem teclado e leitor de tela.
 
@@ -74,3 +75,11 @@ npm run test:performance
 O build deve preceder os testes de navegador: estes servem o pacote `dist/`. `LIVE_URL` é opcional para incluir verificação da publicação. O CI a define apenas na `main`. Relatórios completos e capturas ficam em `test-results/` e no artefato do Actions por 14 dias; relatórios resumidos e capturas principais também são versionados.
 
 Não afirmar teste em aparelho real, auditoria manual de leitor de tela ou conformidade integral antes da execução pertinente.
+
+## Conferência posterior da publicação
+
+A execução da `main` [39974677939](https://github.com/Fr-Abdel/LM-Advocacia-/actions/runs/39974677939) foi concluída com sucesso, incluindo o smoke test externo. A comparação posterior confirmou os dez arquivos do pacote na versão Sites 5; [relatório de integridade](evidence/publication-beta-02.json). A rodada interativa na URL pública conferiu menu/Escape, resumo de erros, exemplo, prévia, edição, limpeza e cópia bem-sucedida no navegador disponível. Essa cópia usou a API real, sem simulação; negação real de permissão e outros navegadores continuam pendentes.
+
+Os oito testes originais do formulário e seis testes novos do comparador de publicação foram aprovados localmente. As 84 combinações, 12 auditorias axe e cinco amostras Lighthouse acima pertencem à rodada de referência de 23/10; não foram substituídas por uma nova auditoria integral. A conferência pública adicional verificou um H1 e ausência de overflow nas seis páginas e sete larguras no navegador disponível. Isso não equivale à matriz Chromium/Firefox nem a inspeção visual completa de 42 capturas novas.
+
+A observação de zero requisições/persistência diz respeito ao código e ao percurso local da aplicação; não abrange scripts de proteção e processamento técnico inseridos pela hospedagem.

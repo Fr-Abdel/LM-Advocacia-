@@ -121,3 +121,25 @@ A auditoria axe não certifica WCAG 2.2 AA integralmente. Capturas não comprova
 A publicação existente é pública e continua vinculada ao mesmo projeto Sites. O pacote adapta somente a base da 404; caminhos relativos e conteúdo permanecem equivalentes. Nenhuma variável de ambiente de produção é necessária. Credenciais não integram fonte ou pacote.
 
 A entrega está no [PR #4](https://github.com/Fr-Abdel/LM-Advocacia-/pull/4), com código, documentação e capturas versionadas. Publicar somente após o CI aprovado, conservar a versão anterior para reversão e conferir o smoke test externo da main. O resultado da implantação é informado na entrega; os relatórios deste documento correspondem à execução de referência citada.
+
+## 9. Conferência posterior de coerência
+
+Referência do GitHub: `0928375084a11d486610857d6faa76b0509ffa50`. A execução [39974677939](https://github.com/Fr-Abdel/LM-Advocacia-/actions/runs/39974677939), disparada pelo merge da beta 0.2 na `main`, terminou com `static-checks` e `browser-checks` aprovados. O workflow testa o pacote local em PRs **e** pushes; apenas nos pushes acrescenta o smoke test da demonstração em Chromium. O Lighthouse sempre mede o servidor local do runner.
+
+| Camada | Conclusão da conferência |
+| --- | --- |
+| Código / pacote | Sintaxe, oito testes do contato, estrutura de seis páginas/97 links e build reproduzidos localmente com sucesso |
+| Workflow original | Sete larguras e ambos os motores no pacote local; checagem pública reduzida em pushes, sem comprovação anterior de igualdade dos arquivos |
+| Publicação | Sites versão 5, implantação concluída em 23/10; dez arquivos correspondentes ao pacote da beta 0.2 |
+| Diferença de infraestrutura | Quatro assets idênticos por SHA-256; seis HTMLs preservados com inserção de um script de proteção Cloudflare antes do fechamento do body |
+| URLs / 404 | Canonical e Open Graph das páginas principais coerentes com os redirecionamentos sem extensão; caminho inexistente retorna 404 personalizado; noindex preservado |
+| Interação pública | Menu/Escape, resumo de erros, exemplo, prévia, edição e limpeza conferidos; cópia real retornou confirmação de sucesso no navegador disponível |
+| Responsividade pública | Seis páginas em sete larguras: um H1 e ausência de overflow horizontal no navegador disponível; inspeção visual amostral em desktop e 390 px |
+
+Os SHAs de origem do GitHub e do Sites pertencem a repositórios diferentes. A correspondência foi verificada pelas respostas HTTP, não presumida pela numeração da beta. [Evidência de publicação](evidence/publication-beta-02.json), com timestamp UTC, hashes esperados/servidos e origem identificada.
+
+Correções limitadas à apresentação técnica: README passa a distinguir execução direta e build de publicação; o roteiro manual define o caso M14 que já constava no registro; `npm run test:published` compara todos os arquivos de `dist/` na `main`, rejeita divergências e preserva relatório. Seis testes do comparador protegem contra aceitação indevida de conteúdo antigo, scripts extras ou páginas de erro; os 14 testes totais passaram localmente. Nenhum HTML, CSS, JavaScript da aplicação, dependência ou configuração da hospedagem foi alterado.
+
+Limites mantidos: NVDA/VoiceOver, Safari/iOS, aparelho físico, zoom real 200/400%, negação real de cópia e desempenho público/de campo não foram aprovados por esta rodada. A cópia bem-sucedida agora tem uma observação real, restrita ao navegador utilizado. Os números Lighthouse/axe da seção 5 são históricos identificados, não resultados de uma nova auditoria. INP real continua ausente; SEO 95 continua uma exceção intencional pelo noindex. O script do provedor impede inferir “zero requisições/cookies na hospedagem” a partir dos testes locais do formulário.
+
+A instalação completa das dependências de auditoria não pôde ser repetida neste ambiente: o cache local é incompleto e o terminal não resolve os hosts externos. Foram usados o CI remoto de referência, as verificações locais sem dependências e a inspeção HTTP/interativa pública para discriminar essa limitação de uma falha do produto. A revisão não afirma nova execução local de Lighthouse, axe ou da matriz completa Playwright.

@@ -56,9 +56,16 @@ Na pasta do projeto, com Python instalado:
 python -m http.server 5500
 ```
 
-Abrir `http://localhost:5500`. No Windows, `py -m http.server 5500` é uma alternativa. Uma extensão de servidor local no VS Code também atende. Não há etapa de build.
+Abrir `http://localhost:5500`. No Windows, `py -m http.server 5500` é uma alternativa. Uma extensão de servidor local no VS Code também atende. Esse modo serve os arquivos de origem. Para revisar o mesmo pacote usado nos testes e na hospedagem na raiz, executar:
 
-**Exceção da página 404:** o `<base>` dessa página aponta para `/LM-Advocacia-/`, caminho previsto no GitHub Pages. Para validá-la fielmente, servir a pasta que contém o projeto com o nome `LM-Advocacia-`, ou ajustar o `<base>` à hospedagem escolhida. As outras páginas funcionam diretamente na raiz ou em subpastas.
+```bash
+npm run build
+python -m http.server 5500 --directory dist
+```
+
+O build não exige instalação de dependências; copia os arquivos públicos e adapta a base da página 404.
+
+**Exceção da página 404 na origem (antes do build):** o `<base>` dessa página aponta para `/LM-Advocacia-/`, caminho previsto no GitHub Pages. Para validá-la fielmente, servir a pasta que contém o projeto com o nome `LM-Advocacia-`, ou ajustar o `<base>` à hospedagem escolhida. As outras páginas funcionam diretamente na raiz ou em subpastas.
 
 ## Verificar
 
@@ -86,7 +93,7 @@ npm run test:browser
 npm run test:performance
 ```
 
-O Playwright é dependência de desenvolvimento; o site publicado permanece sem dependências externas de execução. A suíte revisa seis páginas em 320, 360, 390, 768, 1024, 1440 e 1920 px, testa teclado, formulário, ausência de requisições/persistência e comportamento sem JavaScript. As capturas e o relatório ficam em `test-results/` e nos artefatos do Actions por 14 dias. Em PRs, o workflow verifica o pacote local. Em pushes na `main`, verifica também a demonstração pública em Chromium; uma indisponibilidade externa pode fazer essa etapa falhar. O Lighthouse registra cinco amostras de laboratório; SEO permanece limitado pelo `noindex` intencional e INP real não é medido.
+O Playwright é dependência de desenvolvimento; o código da aplicação não depende dessas ferramentas em execução. A suíte revisa seis páginas em 320, 360, 390, 768, 1024, 1440 e 1920 px, testa teclado, formulário, ausência de requisições/persistência e comportamento sem JavaScript. As capturas e o relatório ficam em `test-results/` e nos artefatos do Actions por 14 dias. Em PRs, o workflow verifica o pacote local. Em pushes na `main`, verifica também a demonstração pública em Chromium; uma indisponibilidade externa pode fazer essa etapa falhar. A etapa `test:published`, também restrita aos pushes na `main`, compara os dez arquivos de `dist/` com as respostas públicas e grava hashes em `test-results/published-report.json`. Ela admite apenas a inserção identificada do provedor nos HTMLs; alterações no conteúdo do projeto falham. Essa checagem não executa implantação. O Lighthouse registra cinco amostras de laboratório; SEO permanece limitado pelo `noindex` intencional e INP real não é medido.
 
 ## Organização
 
@@ -114,7 +121,9 @@ LM-Advocacia-/
 │   ├── check_site.py
 │   ├── site-server.cjs
 │   ├── browser.cjs
-│   └── performance.cjs
+│   ├── performance.cjs
+│   ├── published.cjs
+│   └── published.test.cjs
 ├── scripts/build-static.mjs
 ├── .openai/hosting.json
 ├── .github/workflows/quality.yml
@@ -132,5 +141,7 @@ A direção visual preserva vinho, marfim, tons de pedra e tipografia serifada. 
 - [Escopo e decisões](docs/ESCOPO.md)
 - [Critérios de aceite, testes manuais e evidências](docs/ACEITE-E-TESTES.md)
 - [Roteiro de publicação e próximos incrementos](docs/PUBLICACAO.md)
+
+A [conferência entre código e publicação](docs/REVISAO-BETA-02.md#9-conferência-posterior-de-coerência) registra a correspondência da versão pública 5 com o pacote da beta 0.2 e separa evidências locais das verificações externas.
 
 **Estado da entrega:** demonstração publicada no Sites, com revisão de capturas e testes de navegador documentados em [Aceite e testes](docs/ACEITE-E-TESTES.md). GitHub Pages permanece como alternativa; a URL do Pages não é a demonstração ativa. Leitor de tela, aparelho móvel real e Safari/iOS não foram avaliados. Não há alegação de conformidade integral com WCAG nem de resultados comerciais.
